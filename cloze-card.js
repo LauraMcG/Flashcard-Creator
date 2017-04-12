@@ -1,10 +1,9 @@
-//BASIC CARD -------
-//basic card is a constructor for a basic flash card:
-// question on the front, answer on the back
-function BasicCard(front, back) {
-	this.front = front;
-	this.back = back;
-}
+//pulling in required files
+var fs = require('fs');
+
+//declaring global variables
+//basicCardArray collects all the cards that are created so they can be written to a json file.
+var clozeCardArray = [];
 
 //CLOZE CARD -------
 /*Cloze card is a constructor for a fill-in-the-blank question.
@@ -22,7 +21,7 @@ If the submitted cloze does not exist, it will return an error.
 */
 
 ClozeCard.prototype.partialSearch = function() {
-		//searching the full text for the cloze phrase
+		//first searching the full text for the cloze phrase.
 		//storing the index of the start of the cloze in a variable
 		var clozeStart = this.fullText.indexOf(this.cloze);
 
@@ -36,11 +35,17 @@ ClozeCard.prototype.partialSearch = function() {
 		 }
 }		 
 
+ClozeCard.prototype.saveCard = function() {
+	clozeCardArray.push(this);
+	// console.log (clozeCardArray);
 
-var brokenQuestion = new ClozeCard('This is going to break', 'yes');
-var workingQuestion = new ClozeCard('This will not break', 'will not');
+	var cardArrayJson = JSON.stringify(clozeCardArray);
+	fs.writeFile('cloze-cards.json', cardArrayJson, 'utf8', 'callback');
+};
 
-workingQuestion.partialSearch();
+var aglet = new ClozeCard ('An aglet is the plastic enclosure on the ends of a shoelace.', 'aglet');
+var treadmill = new ClozeCard ('The treadmill, originally invented as a device to work prisoners to death, is now a common piece of fitness equipment.', 'treadmill');
 
-console.log (workingQuestion);
 
+aglet.saveCard();
+treadmill.saveCard();
