@@ -1,0 +1,19 @@
+{
+  "name": "flashcard-creator",
+  "version": "1.0.0",
+  "description": "make flash cards for quizzes, trivia, and review!",
+  "main": "playcards.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LauraMcG/Flashcard-Creator.git"
+  },
+  "author": "Laura McGinn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LauraMcG/Flashcard-Creator/issues"
+  },
+  "homepage": "https://github.com/LauraMcG/Flashcard-Creator#readme"
+}
