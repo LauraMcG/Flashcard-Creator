@@ -9,9 +9,15 @@ var basicCardArray = [];
 //basic card is a constructor for a basic flash card:
 // question on the front, answer on the back
 function BasicCard(front, back) {
-	this.front = front;
-	this.back = back;
+	if(this instanceof BasicCard) {
+    	this.front = front;
+		this.back = back;
+  	} else {
+    	return new BasicCard(front, back);
+    }
 }
+
+
 
 /*saveCard pushes the declared card into basicCardArray
 then writes the entire array into the basic-cards JSON file.
@@ -29,28 +35,10 @@ BasicCard.prototype.saveCard = function() {
 };
 
 var tittle = new BasicCard ('What do you call the dot on top of a lower case "i"?', 'tittle');
-var bakersDozen = new BasicCard ('How many items are in a baker\'s  dozen?', '13');
+var bakersDozen = BasicCard ('How many items are in a bakers dozen?', '13');
+var interrobang = BasicCard ('What is the punctuation mark that is a combination of an exclaimation point and question mark?', 'interrobang');
 
 tittle.saveCard();
 bakersDozen.saveCard();
+interrobang.saveCard();
 
-
-// JSON.parse(basicCardJson);
-
-// console.log('after parse: ' + basicCardJson);
-
-
-
-//reading and writng
-
-
-// fs.appendFile('basic-cards.json', 'writefile works!', 'utf8', 'callback');
-
-// fs.readFile('basic-cards.json', 'utf8', function(error, data) {
-// 	if (error) {
-// 		console.log('error occurred: ' + error );
-// 		return;
-// 	} else {
-// 		console.log(data);
-// 	}
-// });

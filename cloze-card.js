@@ -11,8 +11,8 @@ user will submit the full text and the section they want to remove.
 */
 
 function ClozeCard (fullText, cloze) {
-	this.fullText = fullText;
-	this.cloze = cloze;
+		this.fullText = fullText;
+		this.cloze = cloze;
 }
 
 /*the partial sentence for the cloze card will be created by searching the full 
@@ -37,7 +37,6 @@ ClozeCard.prototype.partialSearch = function() {
 
 ClozeCard.prototype.saveCard = function() {
 	clozeCardArray.push(this);
-	// console.log (clozeCardArray);
 
 	var cardArrayJson = JSON.stringify(clozeCardArray);
 	fs.writeFile('cloze-cards.json', cardArrayJson, 'utf8', 'callback');
@@ -45,9 +44,12 @@ ClozeCard.prototype.saveCard = function() {
 
 var aglet = new ClozeCard ('An aglet is the plastic enclosure on the ends of a shoelace.', 'aglet');
 var treadmill = new ClozeCard ('The treadmill, originally invented as a device to work prisoners to death, is now a common piece of fitness equipment.', 'treadmill');
+var hitchhiker = new ClozeCard ('According to the Hitchhiker\'s Guide to the Galaxy, one should always carry a towel.', 'towel').
 
 aglet.partialSearch();
 treadmill.partialSearch();
+hitchhiker.partialSearch();
 
 aglet.saveCard();
 treadmill.saveCard();
+hitchhiker.saveCard();
