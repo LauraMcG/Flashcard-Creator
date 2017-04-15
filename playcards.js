@@ -13,18 +13,20 @@ var questionsWrong = 0;
 function basicQuiz() {
 
 	//cardQuestions sets up the basic template for questions.
+
+
+	function ask(count) {
+
 	var cardQuestions = [
 		{
 			type: 'input',
 			name: 'question',
-			message: basicQuestions[questionNumber].front
+			message: basicQuestions[count].front
 		}
 	];
 
-	function ask() {
-		console.log(questionNumber);
 		inquirer.prompt(cardQuestions).then(function(user) {
-			if (user.question == basicQuestions[questionNumber].back) {
+			if (user.question == basicQuestions[count].back) {
 				questionNumber++;
 				console.log ('correct!');	
 			} else {
@@ -34,14 +36,14 @@ function basicQuiz() {
 
 			//checking to see whether to move on to the next question
 			if (questionNumber < basicQuestions.length) {
-				ask();
+				ask(questionNumber);
 			} else {
 				console.log('you finished!');
 			}
 		});
 	}
 
-	ask();	
+	ask(questionNumber);	
 }
 
 
