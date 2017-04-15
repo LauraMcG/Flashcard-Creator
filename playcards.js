@@ -10,48 +10,74 @@ var questionsWrong = 0;
 
 //BASIC QUIZ
 
+	
+
 function basicQuiz() {
-
 	//cardQuestions sets up the basic template for questions.
-
-
-	function ask(count) {
 
 	var cardQuestions = [
 		{
 			type: 'input',
 			name: 'question',
-			message: basicQuestions[count].front
+			message: basicQuestions[questionNumber].front
 		}
 	];
 
-		inquirer.prompt(cardQuestions).then(function(user) {
-			if (user.question == basicQuestions[count].back) {
-				questionNumber++;
-				console.log ('correct!');	
-			} else {
-				console.log('incorrect!');
-				questionNumber++;
-			}
+	//using a counter (questionsNumber) instead of a traditional loop to account for the asynchronous nature of inquirer
 
-			//checking to see whether to move on to the next question
-			if (questionNumber < basicQuestions.length) {
-				ask(questionNumber);
-			} else {
-				console.log('you finished!');
-			}
-		});
-	}
+	inquirer.prompt(cardQuestions).then(function(user) {
+		//first if statement checks for a matching (correct) answer. 
+		if (user.question == basicQuestions[questionNumber].back) {
+			questionNumber++;
+			questionsRight ++;
+			console.log ('You got it!');	
+		} else {
+			console.log('Nope! the correct answer was ' + basicQuestions[questionNumber].back + '.');
+			questionNumber++;
+			questionsWrong ++; 
+		}
 
-	ask(questionNumber);	
-}
+		//this if statement checks whether to run the function again to advance to the next question.
+		//if not, it displays the final result.
+		if (questionNumber < basicQuestions.length) {
+			basicQuiz();
+		} else {
+			console.log('You finished!');
+			console.log('Final score: ' + questionsRight + ' correct, '  + questionsWrong  + ' incorrect.');
+		}
+	});
+}	
 
 
 //CLOZE QUIZ
 
 function clozeQuiz() {
-	console.log('cloze quiz works!');
-}
+
+	var cardQuestions = [
+		{
+			type: 'input',
+			name: 'question',
+			message: clozeQuestions[questionNumber].partial
+		}
+	];
+
+	inquirer.prompt(cardQuestions).then(function(user) {
+		if (user.question == clozeQuestions[questionNumber].cloze) {
+			questionNumber++;
+			console.log ('correct!');	
+		} else {
+			console.log('incorrect! ' +  clozeQuestions[questionNumber].fullText);
+			questionNumber++;
+		}
+
+		//checking to see whether to move on to the next question
+		if (questionNumber < clozeQuestions.length) {
+			clozeQuiz();
+		} else {
+			console.log('you finished!');
+		}
+	});
+}	
 
 
 // Opening question. User chooses which kind of questions to answer.

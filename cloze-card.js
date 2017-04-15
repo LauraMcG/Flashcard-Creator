@@ -46,6 +46,8 @@ ClozeCard.prototype.saveCard = function() {
 var aglet = new ClozeCard ('An aglet is the plastic enclosure on the ends of a shoelace.', 'aglet');
 var treadmill = new ClozeCard ('The treadmill, originally invented as a device to work prisoners to death, is now a common piece of fitness equipment.', 'treadmill');
 
+aglet.partialSearch();
+treadmill.partialSearch();
 
 aglet.saveCard();
 treadmill.saveCard();
